@@ -18,7 +18,7 @@
 2. Diseño OO inicial
    1. Definir clases core
    1. Establecer relaciones
-   1. Aplicar [patrón Command]()
+   1. Aplicar [patrón Command](https://en.wikipedia.org/wiki/Command_pattern)
 3. Implementación por capas
    1. Core (Editor, Document)
    1. UI
@@ -92,5 +92,39 @@
 |[DeleteCommand.java](/src/vPRG2/DeleteCommand.java)|||||
 |[SetActiveLineCommand.java](/src/vPRG2/SetActiveLineCommand.java)|||||
 |[ExitCommand.java](/src/vPRG2/ExitCommand.java)|||||
+|LoadCommand.java
+|SaveCommand.java
+
+</div>
+
+### Implementación
+
+Durante la implementación surgieron detalles:
+
+- Tener serializer en Editor/UI exponía detalles de implementación, por lo que se movió a Document donde encapsula mejor la funcionalidad
+- Al implementar LoadCommand, crear un nuevo Document rompía referencias, llevando a introducir updateFrom para actualizar el existente
+- La implementación inicial de SaveCommand estaba accediendo directamente al estado interno de Document (lines), lo que motivó mover la serialización allí
+- Los comandos Save/Load inicialmente no tenían UI, pero necesitaban pedir nombre de archivo, revelando una dependencia oculta
+
+Con esto la arquitectura final quedó:
+
+<div align=center>
+
+|![](/images/documents/vPRG2/DdC-Base-v3.svg)|
+|:-:|
+|Propuesta (clic [**aquí**](DdC-Detallado-v3.md) para ver el detalle)|
+
+---
+
+|||[Editor.java](/src/vPRG2/Editor.java)|||
+|:-:|:-:|:-:|:-:|:-:|
+|[Command.java](/src/vPRG2/Command.java)|[Document.java](/src/vPRG2/Document.java)|[UserInterface.java](/src/vPRG2/UserInterface.java)|[DocumentStorage](/src/vPRG2/DocumentStorage.java)|[DocumentSerializer](/src/vPRG2/DocumentSerializer.java)
+|[EditCommand.java](/src/vPRG2/EditCommand.java)|||[FileManagerAdapter](/src/vPRG2/FileManagerAdapter.java)|[SimpleSerializer](/src/vPRG2/SimpleSerializer.java)|
+|[ExchangeCommand.java](/src/vPRG2/ExchangeCommand.java)|||[FileManager](/src/vPRG2/FileManager.java)||
+|[DeleteCommand.java](/src/vPRG2/DeleteCommand.java)|||||
+|[SetActiveLineCommand.java](/src/vPRG2/SetActiveLineCommand.java)|||||
+|[ExitCommand.java](/src/vPRG2/ExitCommand.java)|||||
+|[LoadCommand.java](/src/vPRG2/LoadCommand.java)
+|[SaveCommand.java](/src/vPRG2/SaveCommand.java)
 
 </div>

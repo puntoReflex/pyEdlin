@@ -1,0 +1,126 @@
+class Editor {
+    -Document document
+    -UserInterface ui
+    -DocumentStorage storage
+    +Editor()
+    +setStorage(String)
+    +hasStorage(): boolean
+    +run()
+}
+
+class Document {
+    -String[] lines
+    -int activeLine
+    -DocumentSerializer serializer
+    +Document()
+    +Document(String[])
+    +getLine(int): String
+    +setLine(int, String)
+    +getActiveLine(): int
+    +setActiveLine(int)
+    +serialize(): String
+    +deserialize(String): Document
+    +updateFrom(Document)
+    +print(UserInterface)
+}
+
+class UserInterface {
+    -Scanner scanner
+    +UserInterface()
+    +showLines(Document)
+    +getCommand(): Command
+    +readInt(): int
+    +readString(): String
+    +clearScreen()
+}
+
+interface Command {
+    +execute(Document): boolean
+}
+
+class EditCommand {
+    -UserInterface ui
+    +EditCommand(UserInterface)
+    +execute(Document): boolean
+}
+
+class ExchangeCommand {
+    -UserInterface ui
+    +ExchangeCommand(UserInterface)
+    +execute(Document): boolean
+}
+
+class DeleteCommand {
+    -UserInterface ui
+    +DeleteCommand(UserInterface)
+    +execute(Document): boolean
+}
+
+class SetActiveLineCommand {
+    -UserInterface ui
+    +SetActiveLineCommand(UserInterface)
+    +execute(Document): boolean
+}
+
+class ExitCommand {
+    +execute(Document): boolean
+}
+
+class SaveCommand {
+    -DocumentStorage storage
+    -UserInterface ui
+    +SaveCommand(DocumentStorage, UserInterface)
+    +execute(Document): boolean
+}
+
+class LoadCommand {
+    -DocumentStorage storage
+    -UserInterface ui
+    +LoadCommand(DocumentStorage, UserInterface)
+    +execute(Document): boolean
+}
+
+interface DocumentStorage {
+    +save(String): boolean
+    +load(): String
+}
+
+interface DocumentSerializer {
+    +serialize(Document): String
+    +deserialize(String): Document
+}
+
+class FileManagerAdapter {
+    -FileManager fileManager
+    +FileManagerAdapter(String)
+    +save(String): boolean
+    +load(): String
+}
+
+class SimpleSerializer {
+    +serialize(Document): String
+    +deserialize(String): Document
+}
+
+Editor -d-> Document
+Editor -d-> UserInterface
+Editor -d-> DocumentStorage
+Document --> DocumentSerializer
+Command <|.. EditCommand
+Command <|.. ExchangeCommand
+Command <|.. DeleteCommand
+Command <|.. SetActiveLineCommand
+Command <|.. ExitCommand
+Command <|.. SaveCommand
+Command <|.. LoadCommand
+DocumentStorage <|.. FileManagerAdapter
+DocumentSerializer <|.. SimpleSerializer
+FileManagerAdapter --> FileManager
+EditCommand -u-> UserInterface
+ExchangeCommand -u-> UserInterface
+DeleteCommand -u-> UserInterface
+SetActiveLineCommand -u-> UserInterface
+SaveCommand -u-> UserInterface
+SaveCommand --> DocumentStorage
+LoadCommand -u-> UserInterface
+LoadCommand --> DocumentStorage
