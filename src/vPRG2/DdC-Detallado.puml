@@ -1,0 +1,61 @@
+class Editor {
+    -Document document
+    -UserInterface ui
+    +Editor()
+    +run()
+    -processCommand(): boolean
+}
+
+class Document {
+    -String[] lines
+    -int activeLine
+    +Document()
+    +getLine(int): String
+    +setLine(int, String)
+    +getActiveLine(): int
+    +setActiveLine(int)
+    +print(UserInterface)
+}
+
+class UserInterface {
+    -Scanner scanner
+    +UserInterface()
+    +showLines(Document)
+    +getCommand(): Command
+    +readInt(): int
+    +readString(): String
+    +clearScreen()
+}
+
+interface Command {
+    +execute(Document): boolean
+}
+
+class EditCommand {
+    +execute(Document): boolean
+}
+
+class ExchangeCommand {
+    +execute(Document): boolean
+}
+
+class DeleteCommand {
+    +execute(Document): boolean
+}
+
+class SetActiveLineCommand {
+    +execute(Document): boolean
+}
+
+class ExitCommand {
+    +execute(Document): boolean
+}
+
+Editor --> Document
+Editor --> UserInterface
+Editor --> Command
+Command <|.. EditCommand
+Command <|.. ExchangeCommand
+Command <|.. DeleteCommand
+Command <|.. SetActiveLineCommand
+Command <|.. ExitCommand

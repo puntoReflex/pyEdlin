@@ -1,0 +1,12 @@
+hide empty members
+
+interface Command 
+
+Editor --> Document
+Editor --> UserInterface
+Editor --> Command
+Command <|.. EditCommand
+Command <|.. ExchangeCommand
+Command <|.. DeleteCommand
+Command <|.. SetActiveLineCommand
+Command <|.. ExitCommand
