@@ -16,7 +16,7 @@
 2. Diseño OO inicial
    1. Definir clases core
    1. Establecer relaciones
-   1. Aplicar [patrón Command]()
+   1. Aplicar [patrón Command](https://en.wikipedia.org/wiki/Command_pattern)
 3. Implementación por capas
    1. Core (Editor, Document)
    1. UI
