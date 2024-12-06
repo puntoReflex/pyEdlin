@@ -1,0 +1,15 @@
+interface Command
+interface DocumentStorage
+interface DocumentSerializer
+
+Editor --> Document
+Editor --> UserInterface
+Editor --> Command
+
+Editor --> DocumentStorage
+Editor --> DocumentSerializer
+Command <|.. SaveCommand
+Command <|.. LoadCommand
+DocumentStorage <|.. FileManagerAdapter
+DocumentSerializer <|.. SimpleSerializer
+FileManagerAdapter --> FileManager

@@ -1,0 +1,77 @@
+class Editor {
+    -Document document
+    -UserInterface ui
+    -DocumentStorage storage
+    -DocumentSerializer serializer
+    +Editor()
+    +run()
+    -processCommand(): boolean
+}
+
+class Document {
+    -String[] lines
+    -int activeLine
+    +Document()
+    +getLine(int): String
+    +setLine(int, String)
+    +getActiveLine(): int
+    +setActiveLine(int)
+    +print(UserInterface)
+}
+
+class UserInterface {
+    -Scanner scanner
+    +UserInterface()
+    +showLines(Document)
+    +getCommand(): Command
+    +readInt(): int
+    +readString(): String
+    +clearScreen()
+}
+
+class Command {
+    <<interface>>
+    +execute(Document): boolean
+}
+
+class DocumentStorage {
+    <<interface>>
+    +save(String): boolean
+    +load(): String
+}
+
+class DocumentSerializer {
+    <<interface>>
+    +serialize(Document): String
+    +deserialize(String): Document
+}
+
+class FileManagerAdapter {
+    -FileManager fileManager
+    +save(String): boolean
+    +load(): String
+}
+
+class SimpleSerializer {
+    +serialize(Document): String
+    +deserialize(String): Document
+}
+
+class SaveCommand {
+    +execute(Document): boolean
+}
+
+class LoadCommand {
+    +execute(Document): boolean
+}
+
+Editor --> Document
+Editor --> UserInterface
+Editor --> DocumentStorage
+Editor --> DocumentSerializer
+Editor --> Command
+Command <|.. SaveCommand
+Command <|.. LoadCommand
+DocumentStorage <|.. FileManagerAdapter
+DocumentSerializer <|.. SimpleSerializer
+FileManagerAdapter --> FileManager
