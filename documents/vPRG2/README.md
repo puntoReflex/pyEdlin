@@ -32,6 +32,6 @@
 
 |![](/images/src/vPRG2/DdC-Base.svg)
 |:-:
-Propuesta (clic [**aquí**](/images/src/vPRG2/DdC-Detallado.svg) para ver el detalle)
+Propuesta (clic [**aquí**](DdC-Detallado.md) para ver el detalle)
 
 </div>
