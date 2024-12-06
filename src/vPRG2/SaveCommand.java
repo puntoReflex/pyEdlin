@@ -2,16 +2,20 @@ package vPRG2;
 
 public class SaveCommand implements Command {
     private DocumentStorage storage;
-    private DocumentSerializer serializer;
-
-    public SaveCommand(DocumentStorage storage, DocumentSerializer serializer) {
+    private UserInterface ui;
+    
+    public SaveCommand(DocumentStorage storage, UserInterface ui) {
         this.storage = storage;
-        this.serializer = serializer;
+        this.ui = ui;
     }
-
+    
     @Override
     public boolean execute(Document document) {
-        String serialized = serializer.serialize(document);
-        return storage.save(serialized);
+        if (storage == null) {
+            System.out.print("Nombre del archivo: ");
+            String filePath = ui.readString();
+            storage = new FileManagerAdapter(filePath);
+        }
+        return storage.save(document.serialize());
     }
-}
+ }

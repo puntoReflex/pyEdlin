@@ -2,20 +2,26 @@ package vPRG2;
 
 public class LoadCommand implements Command {
     private DocumentStorage storage;
-    private DocumentSerializer serializer;
-
-    public LoadCommand(DocumentStorage storage, DocumentSerializer serializer) {
+    private UserInterface ui;
+    
+    public LoadCommand(DocumentStorage storage, UserInterface ui) {
         this.storage = storage;
-        this.serializer = serializer;
+        this.ui = ui;
     }
-
+    
     @Override
     public boolean execute(Document document) {
+        if (storage == null) {
+            System.out.print("Nombre del archivo: ");
+            String filePath = ui.readString();
+            storage = new FileManagerAdapter(filePath);
+        }
         String content = storage.load();
         if (content != null) {
-            document = serializer.deserialize(content);
+            Document loaded = Document.deserialize(content);
+            document.updateFrom(loaded);
             return true;
         }
         return false;
     }
-}
+ }

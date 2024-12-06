@@ -46,8 +46,8 @@ public class UserInterface {
             case 'E' -> new EditCommand(this);
             case 'I' -> new ExchangeCommand(this);
             case 'B' -> new DeleteCommand(this);
-            case 'G' -> new SaveCommand(storage, serializer);
-            case 'C' -> new LoadCommand(storage, serializer);
+            case 'G' -> new SaveCommand(storage, this);
+            case 'C' -> new LoadCommand(storage, this);
             default -> null;
         };
     }
