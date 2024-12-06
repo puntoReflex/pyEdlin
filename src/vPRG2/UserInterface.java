@@ -4,6 +4,8 @@ import java.util.Scanner;
 
 public class UserInterface {
     private Scanner scanner;
+    private DocumentStorage storage;
+    private DocumentSerializer serializer;
     
     public UserInterface() {
         this.scanner = new Scanner(System.in);
@@ -32,7 +34,7 @@ public class UserInterface {
     }
     
     public Command getCommand() {
-        System.out.println("Comandos: [L]inea activa | [E]ditar | [I]ntercambiar | [B]orrar | [S]alir");
+        System.out.println("Comandos: [L]inea | [E]ditar | [I]ntercambiar | [B]orrar | [G]uardar | [C]argar | [S]alir");
         char option = readChar();
         return createCommand(option);
     }
@@ -44,6 +46,8 @@ public class UserInterface {
             case 'E' -> new EditCommand(this);
             case 'I' -> new ExchangeCommand(this);
             case 'B' -> new DeleteCommand(this);
+            case 'G' -> new SaveCommand(storage, serializer);
+            case 'C' -> new LoadCommand(storage, serializer);
             default -> null;
         };
     }
