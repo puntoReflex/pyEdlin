@@ -19,7 +19,16 @@ public class Document {
         };
         this.activeLine = 0;
     }
+
+    public Document(String[] lines) {
+        this.lines = lines;
+        this.activeLine = 0;
+    }
     
+    public String[] getAllLines() {
+        return lines.clone();
+    }    
+
     public String getLine(int index) {
         return lines[index];
     }
