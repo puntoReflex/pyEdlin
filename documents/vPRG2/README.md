@@ -16,7 +16,7 @@
 2. Diseño OO inicial
    1. Definir clases core
    1. Establecer relaciones
-   1. Aplicar patrón Command
+   1. Aplicar [patrón Command]()
 3. Implementación por capas
    1. Core (Editor, Document)
    1. UI
@@ -32,6 +32,17 @@
 
 |![](/images/src/vPRG2/DdC-Base.svg)
 |:-:
-Propuesta (clic [**aquí**](DdC-Detallado.md) para ver el detalle)
+|Propuesta (clic [**aquí**](DdC-Detallado.md) para ver el detalle)
+
+---
+
+||[Editor.java](/src/vPRG2/Editor.java)||
+|:-:|:-:|:-:|
+|[Command.java](/src/vPRG2/Command.java)|[Document.java](/src/vPRG2/Document.java)|[UserInterface.java](/src/vPRG2/UserInterface.java)|
+|[EditCommand.java](/src/vPRG2/EditCommand.java)
+|[ExchangeCommand.java](/src/vPRG2/ExchangeCommand.java)
+|[DeleteCommand.java](/src/vPRG2/DeleteCommand.java)
+|[SetActiveLineCommand.java](/src/vPRG2/SetActiveLineCommand.java)
+|[ExitCommand.java](/src/vPRG2/ExitCommand.java)
 
 </div>
