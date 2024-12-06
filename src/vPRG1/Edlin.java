@@ -81,25 +81,23 @@ class Edlin {
     }
 
     static void exchangeLines(String[] document) {
-        int originLine, destinationLine;
-        String temporaryLine;
-        boolean validLine = true;
+        int originLine = askLine(document);
+        int destinationLine = askLine(document);
 
-        do {
-            System.out.print("Indique primera línea a intercambiar: ");
-            originLine = askInt();
-            validLine = originLine >= 0 && originLine < document.length;
-        } while (!validLine);
-
-        do {
-            System.out.print("Indique segunda línea a intercambiar: ");
-            destinationLine = askInt();
-            validLine = destinationLine >= 0 && destinationLine < document.length;
-        } while (!validLine);
-
-        temporaryLine = document[destinationLine];
+        String temporaryLine = document[destinationLine];
         document[destinationLine] = document[originLine];
         document[originLine] = temporaryLine;
+    }
+
+    static int askLine(String[] document){
+        int line;
+        boolean validLine;
+        do {
+            System.out.print("Indique línea: ");
+            line = askInt();
+            validLine = line >= 0 && line < document.length;
+        } while (!validLine);
+        return line;
     }
 
     static void edit(String[] document, int[] activeLine) {
@@ -113,12 +111,7 @@ class Edlin {
     }
 
     static void setActiveLine(String[] document, int[] activeLine) {
-        boolean validLine = true;
-        do {
-            System.out.print("Indique la nueva línea activa: ");
-            activeLine[0] = askInt();
-            validLine = activeLine[0] >= 0 && activeLine[0] < document.length;
-        } while (!validLine);
+        activeLine[0] = askLine(document);
     }
 
     static int askInt() {
