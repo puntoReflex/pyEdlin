@@ -62,7 +62,7 @@ public class Document {
     }
 
     public void print(UserInterface ui) {
-        ui.showLines(this);
+        ui.render(this);
     }
 
     public void updateFrom(Document other) {

@@ -4,23 +4,30 @@ import java.util.Scanner;
 
 public class UserInterface {
     private Scanner scanner;
-    private DocumentRenderer renderer;
     private DocumentStorage storage;
-    
+    private DocumentRenderer renderer;
+    private DocumentRenderer editorRenderer;
+    private DocumentRenderer previewRenderer;
+    private boolean inPreviewMode;
+
     public UserInterface(DocumentStorage storage) {
         this.scanner = new Scanner(System.in);
-        this.renderer = new EditorRenderer();
         this.storage = storage;
+        this.editorRenderer = new EditorRenderer();
+        this.previewRenderer = new PreviewRenderer();
+        this.renderer = editorRenderer;
+        this.inPreviewMode = false;
     }
- 
-    public void setRenderer(DocumentRenderer renderer) {
-        this.renderer = renderer;
+
+    public void toggleView() {
+        if (inPreviewMode) {
+            renderer = editorRenderer;
+        } else {
+            renderer = previewRenderer;
+        }
+        inPreviewMode = !inPreviewMode;
     }
-    
-    public void showLines(Document document) {
-        renderer.render(document, this);
-    }
-    
+
     public String separator(int line, int activeLine) {
         return line == activeLine ? ":*| " : ": | ";
     }
@@ -33,13 +40,15 @@ public class UserInterface {
         System.out.print("\033[H\033[2J");
         System.out.flush();
     }
-    
+
     public Command getCommand() {
-        System.out.println("Comandos: [L]inea | [E]ditar | [I]ntercambiar | [B]orrar | [G]uardar | [C]argar | [V]ista | [S]alir");
+        System.out
+                .println("Comandos: [L]inea | [E]ditar | [I]ntercambiar | [B]orrar | [G]uardar | [C]argar | [V]ista(" +
+                        (inPreviewMode ? "Preview" : "Normal") + ") | [S]alir");
         char option = readChar();
         return createCommand(option);
     }
-    
+
     private Command createCommand(char option) {
         return switch (Character.toUpperCase(option)) {
             case 'S' -> new ExitCommand();
@@ -53,17 +62,21 @@ public class UserInterface {
             default -> null;
         };
     }
-    
+
     public char readChar() {
         return scanner.next().charAt(0);
     }
-    
+
     public String readString() {
         scanner.nextLine();
         return scanner.nextLine();
     }
-    
+
     public int readInt() {
         return scanner.nextInt();
     }
- }
+
+    public void render(Document document) {
+        renderer.render(document, this);
+    }    
+}
