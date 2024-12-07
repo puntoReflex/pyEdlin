@@ -28,19 +28,6 @@ public class UserInterface {
         inPreviewMode = !inPreviewMode;
     }
 
-    public String separator(int line, int activeLine) {
-        return line == activeLine ? ":*| " : ": | ";
-    }
-    
-    public void printHorizontalLine() {
-        System.out.println("-".repeat(50));
-    }
-    
-    public void clearScreen() {
-        System.out.print("\033[H\033[2J");
-        System.out.flush();
-    }
-
     public Command getCommand() {
         System.out
                 .println("Comandos: [L]inea | [E]ditar | [I]ntercambiar | [B]orrar | [G]uardar | [C]argar | [V]ista(" +
