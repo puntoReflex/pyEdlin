@@ -33,7 +33,7 @@ public class UserInterface {
     }
     
     public Command getCommand() {
-        System.out.println("Comandos: [L]inea | [E]ditar | [I]ntercambiar | [B]orrar | [G]uardar | [C]argar | [S]alir");
+        System.out.println("Comandos: [L]inea | [E]ditar | [I]ntercambiar | [B]orrar | [G]uardar | [C]argar | [V]ista | [S]alir");
         char option = readChar();
         return createCommand(option);
     }
@@ -47,6 +47,7 @@ public class UserInterface {
             case 'B' -> new DeleteCommand(this);
             case 'G' -> new SaveCommand(storage, this);
             case 'C' -> new LoadCommand(storage, this);
+            case 'V' -> new ChangeViewCommand(this);
             default -> null;
         };
     }
