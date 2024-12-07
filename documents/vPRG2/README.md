@@ -128,3 +128,49 @@ Con esto la arquitectura final quedó:
 |[SaveCommand.java](/src/vPRG2/SaveCommand.java)
 
 </div>
+
+## Implementación de vistas (renderizado)
+
+### Plan de ataque
+
+> Aplicando el patrón Strategy para la renderización
+
+|||
+|-|-|
+|Partiendo del sistema actual donde la visualización estaba acoplada a UserInterface, aplicamos el patrón Strategy para separar los diferentes modos de visualización. Esta separación permite que cada modo de renderizado evolucione independientemente, manteniendo la coherencia con el diseño existente.|El uso de RenderUtils como clase de utilidad centraliza las operaciones comunes de visualización, mientras que la gestión del estado de renderizado en UserInterface mantiene el encapsulamiento y sigue el principio "Tell, Don't Ask".|
+
+### Evolución del diseño
+
+1. Extracción de la interfaz DocumentRenderer
+1. Implementación de renderizadores específicos (EditorRenderer, PreviewRenderer)
+1. Refactorización de utilidades de renderizado
+1. Integración con el sistema de comandos existente
+
+### Beneficios obtenidos
+
+- Facilidad para agregar nuevos modos de visualización
+- Mejor separación de responsabilidades
+- Reutilización de código de renderizado
+- Mantenimiento del diseño orientado a objetos existente
+
+<div align=center>
+
+|![](/images/documents/vPRG2/DdC-Detallado-v4-Simplificado.svg)
+|:-:|
+|Propuesta (clic [**aquí**](DdC-Detallado-v4.md) para ver el detalle)|
+
+---
+
+|||[Editor.java](/src/vPRG2/Editor.java)|||
+|:-:|:-:|:-:|:-:|:-:|
+|[Command.java](/src/vPRG2/Command.java)|[Document.java](/src/vPRG2/Document.java)|[UserInterface.java](/src/vPRG2/UserInterface.java)|[DocumentStorage](/src/vPRG2/DocumentStorage.java)|[DocumentSerializer](/src/vPRG2/DocumentSerializer.java)
+|[EditCommand.java](/src/vPRG2/EditCommand.java)|[DocumentRenderer.java](/src/vPRG2/DocumentRenderer.java)||[FileManagerAdapter](/src/vPRG2/FileManagerAdapter.java)|[SimpleSerializer](/src/vPRG2/SimpleSerializer.java)|
+|[ExchangeCommand.java](/src/vPRG2/ExchangeCommand.java)|[EditorRenderer.java](/src/vPRG2/EditorRenderer.java)||[FileManager](/src/vPRG2/FileManager.java)||
+|[DeleteCommand.java](/src/vPRG2/DeleteCommand.java)|[PreviewRenderer.java](/src/vPRG2/PreviewRenderer.java)||||
+|[SetActiveLineCommand.java](/src/vPRG2/SetActiveLineCommand.java)|[RenderUtils.java](/src/vPRG2/RenderUtils.java)||||
+|[ExitCommand.java](/src/vPRG2/ExitCommand.java)|||||
+|[LoadCommand.java](/src/vPRG2/LoadCommand.java)|||||
+|[SaveCommand.java](/src/vPRG2/SaveCommand.java)|||||
+|[ChangeViewCommand.java](/src/vPRG2/ChangeViewCommand.java)|||||
+
+</div>

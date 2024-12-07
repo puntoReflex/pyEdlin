@@ -1,0 +1,20 @@
+interface DocumentRenderer
+interface Command
+interface DocumentStorage
+interface DocumentSerializer
+class RenderUtils <<utility>>
+
+Editor --> Document
+Editor --> UserInterface
+Editor --> DocumentStorage
+Document --> DocumentSerializer
+UserInterface --> DocumentRenderer
+UserInterface --> Command
+DocumentRenderer <|.. EditorRenderer
+DocumentRenderer <|.. PreviewRenderer
+Command <|.. ChangeViewCommand
+DocumentStorage <|.. FileManagerAdapter
+DocumentSerializer <|.. SimpleSerializer
+FileManagerAdapter --> FileManager
+EditorRenderer ..> RenderUtils
+PreviewRenderer ..> RenderUtils

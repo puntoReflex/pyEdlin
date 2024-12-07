@@ -1,0 +1,106 @@
+class Editor {
+    -Document document
+    -UserInterface ui
+    -DocumentStorage storage
+    +Editor()
+    +setStorage(String)
+    +hasStorage(): boolean
+    +run()
+}
+
+class Document {
+    -String[] lines
+    -int activeLine
+    -DocumentSerializer serializer
+    +Document()
+    +Document(String[])
+    +getLine(int): String
+    +setLine(int, String)
+    +getActiveLine(): int
+    +setActiveLine(int)
+    +print(UserInterface)
+}
+
+class UserInterface {
+    -Scanner scanner
+    -DocumentStorage storage
+    -DocumentRenderer renderer
+    -DocumentRenderer editorRenderer
+    -DocumentRenderer previewRenderer
+    -boolean inPreviewMode
+    +UserInterface(DocumentStorage)
+    +render(Document)
+    +toggleView()
+    +getCommand(): Command
+}
+
+class RenderUtils <<utility>> {
+
+    +clearScreen()$
+    +printHorizontalLine()$
+    +separator(int, int)$: String
+}
+
+interface DocumentRenderer {
+    +render(Document, UserInterface)
+}
+
+class EditorRenderer {
+    +render(Document, UserInterface)
+}
+
+class PreviewRenderer {
+    +render(Document, UserInterface)
+}
+
+interface Command {
+    +execute(Document): boolean
+}
+
+class ChangeViewCommand {
+    -UserInterface ui
+    +execute(Document): boolean
+}
+
+interface DocumentStorage {
+    +save(String): boolean
+    +load(): String
+}
+
+interface DocumentSerializer {
+    +serialize(Document): String
+    +deserialize(String): Document
+}
+
+class FileManagerAdapter {
+    -FileManager fileManager
+    +save(String): boolean
+    +load(): String
+}
+
+class SimpleSerializer {
+    +serialize(Document): String
+    +deserialize(String): Document
+}
+
+Editor --> Document
+Editor --> UserInterface
+Editor --> DocumentStorage
+Document --> DocumentSerializer
+UserInterface --> DocumentRenderer
+UserInterface --> Command
+DocumentRenderer <|.. EditorRenderer
+DocumentRenderer <|.. PreviewRenderer
+Command <|.. EditCommand
+Command <|.. ExchangeCommand
+Command <|.. DeleteCommand
+Command <|.. SetActiveLineCommand
+Command <|.. ExitCommand
+Command <|.. SaveCommand
+Command <|.. LoadCommand
+Command <|.. ChangeViewCommand
+DocumentStorage <|.. FileManagerAdapter
+DocumentSerializer <|.. SimpleSerializer
+FileManagerAdapter --> FileManager
+EditorRenderer ..> RenderUtils
+PreviewRenderer ..> RenderUtils
