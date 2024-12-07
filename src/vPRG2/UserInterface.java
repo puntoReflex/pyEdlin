@@ -4,31 +4,30 @@ import java.util.Scanner;
 
 public class UserInterface {
     private Scanner scanner;
-    private DocumentStorage storage;
-    private DocumentSerializer serializer;
+    private DocumentRenderer renderer;
     
     public UserInterface() {
         this.scanner = new Scanner(System.in);
+        this.renderer = new EditorRenderer();
+    }
+ 
+    public void setRenderer(DocumentRenderer renderer) {
+        this.renderer = renderer;
     }
     
-    public void showLines(Document doc) {
-        clearScreen();
-        printHorizontalLine();
-        for (int i = 0; i < doc.getLineCount(); i++) {
-            System.out.println(i + separator(i, doc.getActiveLine()) + doc.getLine(i));
-        }
-        printHorizontalLine();
+    public void showLines(Document document) {
+        renderer.render(document, this);
     }
     
-    private String separator(int line, int activeLine) {
+    public String separator(int line, int activeLine) {
         return line == activeLine ? ":*| " : ": | ";
     }
     
-    private void printHorizontalLine() {
+    public void printHorizontalLine() {
         System.out.println("-".repeat(50));
     }
     
-    private void clearScreen() {
+    public void clearScreen() {
         System.out.print("\033[H\033[2J");
         System.out.flush();
     }
