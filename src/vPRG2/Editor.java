@@ -9,7 +9,7 @@ public class Editor {
     public Editor() {
         this.serializer = new SimpleSerializer();
         this.document = new Document();
-        this.ui = new UserInterface();
+        this.ui = new UserInterface(storage);
     }
 
     public void setStorage(String filePath) {

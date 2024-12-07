@@ -5,10 +5,12 @@ import java.util.Scanner;
 public class UserInterface {
     private Scanner scanner;
     private DocumentRenderer renderer;
+    private DocumentStorage storage;
     
-    public UserInterface() {
+    public UserInterface(DocumentStorage storage) {
         this.scanner = new Scanner(System.in);
         this.renderer = new EditorRenderer();
+        this.storage = storage;
     }
  
     public void setRenderer(DocumentRenderer renderer) {
