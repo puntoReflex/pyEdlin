@@ -1,0 +1,38 @@
+hide circle
+hide empty members
+
+class "Edlin" as PROGRAMA {
+    main()
+}
+
+class "Datos" as MODELO {
+    document[]
+    activeLine
+}
+
+class "Operaciones" as CONTROLADOR {
+    processActions()
+    ....
+    edit()
+    setActiveLine()
+    exchangeLines()
+    delete()
+}
+
+class "Presentación" as VISTA {
+    print()
+    ....
+    clearScreen()
+    printHorizontalLine()
+    separator()
+    askChar()
+    askString()
+    askInt()
+    askLine()
+}
+
+PROGRAMA -d-> MODELO : usa
+CONTROLADOR -l-> MODELO : modifica
+VISTA -r-> MODELO : consulta
+PROGRAMA -d-> CONTROLADOR : llama
+PROGRAMA -d-> VISTA : llama

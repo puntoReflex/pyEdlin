@@ -1,0 +1,16 @@
+hide circle
+hide empty members
+
+class "Datos" as MODELO 
+
+class "Operaciones" as CONTROLADOR 
+
+Dclass "Presentación" as VISTA 
+
+class "Edlin" as PROGRAMA 
+
+PROGRAMA -d-> MODELO : usa
+CONTROLADOR -l-> MODELO : modifica
+VISTA -r-> MODELO : consulta
+PROGRAMA -d-> CONTROLADOR : llama
+PROGRAMA -d-> VISTA : llama

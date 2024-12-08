@@ -1,0 +1,47 @@
+hide circle
+
+class "Datos" as MODELO {
+    document[]
+    activeLine[]
+}
+
+class "Operaciones" as CONTROLADOR {
+    <i>Métodos que modifican</i>
+    <i>el documento</i>
+    ....
+    processActions()
+    ....
+    edit()
+    setActiveLine()
+    exchangeLines()
+    delete()
+}
+
+class "Presentación" as VISTA {
+    <i>Métodos de E/S y</i>
+    <i>presentación</i>
+    ....
+    print()
+    ....
+    clearScreen()
+    printHorizontalLine()
+    separator()
+    askChar()
+    askString()
+    askInt()
+    askLine()
+}
+
+class "Edlin" as PROGRAMA {
+    <<coordinador>>
+    <i>inicializa datos</i>
+    <i>bucle principal</i>
+    ....
+    main()
+}
+
+PROGRAMA -d-> MODELO : usa
+CONTROLADOR -l-> MODELO : modifica
+VISTA -r-> MODELO : consulta
+PROGRAMA -d-> CONTROLADOR : llama
+PROGRAMA -d-> VISTA : llama
