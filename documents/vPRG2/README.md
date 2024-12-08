@@ -30,7 +30,7 @@
 
 <div align=center>
 
-|![](/images/src/vPRG2/DdC-Base.svg)
+|![](/images/documents/vPRG2/DdC-Base.svg)
 |:-:
 |Propuesta (clic [**aquí**](DdC-Detallado.md) para ver el detalle)
 

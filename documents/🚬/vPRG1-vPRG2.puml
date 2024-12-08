@@ -1,0 +1,92 @@
+[*] --> Identificacion
+
+state "Revisión del panorama" as Identificacion
+Identificacion: - Todo está en una sola clase
+Identificacion: - Cualquier cambio requiere modificar múltiples partes
+Identificacion: - Los arrays document y activeLine se propagan por todo el código
+Identificacion: - El switch de comandos aumenta con cada nueva funcionalidad
+
+state "Reflexión Inicial" as Reflexion {
+
+    state "Observación del flujo de control" as Flujo
+    Flujo: El switch centraliza la decisión de qué acción ejecutar
+    Flujo: Cada opción del menú representa una acción independiente
+    Flujo: Las acciones podrían ser clases separadas
+    Flujo: Todas las acciones operan sobre el documento
+
+    state "Reconocimiento de patrones de uso" as Patrones
+    Patrones: Existen métodos dedicados solo a mostrar información
+    Patrones: Otros métodos se dedican exclusivamente a leer datos del usuario
+    Patrones: La interfaz de usuario podría separarse
+    Patrones: Una clase UserInterface podría gestionar toda la interacción
+
+    state "Separar datos" as SepararDatos
+    SepararDatos: El documento y su línea activa forman una unidad lógica
+    SepararDatos: Una clase Document podría encapsular estos datos
+    SepararDatos: Los métodos que manipulan estos datos pertenecerían a esa clase
+}
+Reflexion: El análisis inicial puede realizarse en paralelo
+Reflexion: Estas observaciones se retroalimentan entre sí
+state primeraReflexion <<fork>>
+
+state finPrimeraReflexion <<join>>
+
+Identificacion --> primeraReflexion
+primeraReflexion --> SepararDatos
+primeraReflexion --> Patrones
+primeraReflexion --> Flujo
+SepararDatos --> finPrimeraReflexion
+Patrones --> finPrimeraReflexion
+Flujo --> finPrimeraReflexion
+
+state "Diseño de solución" as Disenyo {
+
+    state "Estructura MVC" as MVC
+    MVC: Se requiere un elemento coordinador
+    MVC: La clase Editor puede actuar como punto de entrada
+    MVC: Editor puede crear y gestionar documento e interfaz
+    MVC: La coordinación de comandos sería su responsabilidad
+
+    state "Coordinación" as Commands
+    Commands: Las acciones comparten una estructura común
+    Commands: Todas reciben un documento y devuelven un estado de continuación
+    Commands: Una interfaz común podría unificarlas
+    Commands: Esto facilitaría la adición de nuevas acciones
+    MVC --r--> Commands
+    MVC <--r-- Commands
+}
+
+Disenyo: La definición de la estructura y la coordinación se retroalimentan
+finPrimeraReflexion --> Disenyo
+
+state "Refinado del diseño" as DisenyoRefinado {
+
+    state Dependencias
+    Dependencias: Los Commands requieren acceso a la interfaz
+    Dependencias: La inyección en el constructor resuelve esta dependencia
+    Dependencias: El documento puede pasarse en la ejecución
+    Dependencias: Esta estructura aumenta la flexibilidad
+
+    state Validacion
+    Validacion: La adición de comandos se simplifica
+    Validacion: La interfaz puede modificarse sin afectar la lógica
+    Validacion: El código gana en organización pese a su extensión
+    Validacion: Las responsabilidades quedan claramente definidas
+    Dependencias --r--> Validacion
+    Dependencias <--r-- Validacion
+}
+
+DisenyoRefinado: Cada clase adquiere un propósito específico
+DisenyoRefinado: - <b>Document</b>: gestión de datos
+DisenyoRefinado: - <b>UserInterface</b>: gestión de interacción
+DisenyoRefinado: - <b>Commands</b>: encapsulación de acciones
+DisenyoRefinado: - <b>Editor</b>: coordinación general
+Disenyo --> DisenyoRefinado
+DisenyoRefinado <-- DisenyoRefinado : Iteración
+
+note left of DisenyoRefinado
+    El código gana en claridad
+    Los cambios se localizan mejor
+    Los componentes son reutilizables
+    Las pruebas del código se facilitan
+end note
