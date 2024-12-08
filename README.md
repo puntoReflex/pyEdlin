@@ -8,7 +8,7 @@
 
 |Asignatura|Versión|
 |-|-|
-|PRG1|[vPRG1](/src/vPRG1/Edlin.java)|
-|PRG2|[vPRG2](/src/vPRG2/)|
+|PRG1|[📜](/src/vPRG1/Edlin.java) & [🧠](/documents/vPRG1/README.md)|
+|PRG2|[📜](/src/vPRG2/) & [🧠](/documents/vPRG2/README.md)|
 |EDA1||
 |IdSw1||
