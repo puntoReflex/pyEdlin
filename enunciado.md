@@ -1,5 +1,3 @@
-<img src="https://pbs.twimg.com/media/GCzChW9WUAA9eBd?format=png&name=medium" width="40%" align="right"/>
-
 # Edlin
 
 [EDLIN](https://es.wikipedia.org/wiki/EDLIN) [(🇬🇧)](https://es.wikipedia.org/wiki/EDLIN) es un editor de líneas incluido en MS-DOS y más tarde en los sistemas operativos Windows de Microsoft. Proporciona capacidades rudimentarias para editar ficheros de texto plano a través de una interfaz de comandos. Los números de línea son especificados usando números, y las operaciones son especificadas usando un sólo carácter alfabético.
@@ -11,6 +9,22 @@ Edlin fue creado por Tim Paterson en dos semanas en 1980, y se esperaba que tuvi
 ## RETO
 
 Implementar una primera versión de Edlin, que pueda gestionar un fichero de 10 líneas
+
+```
+--------------------------------------------------
+0: | Bienvenidos al editor EDLIN
+1:*| Utilice el menu inferior para editar el texto
+2: | ------
+3: | [L] permite definir la linea activa
+4: | [E] permite editar la linea activa
+5: | [I] permite intercambiar dos lineas
+6: | [B] borra el contenido de la linea activa
+7: | [S] sale del programa
+8: | 
+9: | 
+--------------------------------------------------
+Comandos: [L]inea activa | [E]ditar | [I]ntercambiar | [B]orrar | [S]alir
+```
 
 ### RETOS BASE
 
